@@ -6,6 +6,7 @@ struct trie {
     } next[2];
     int count;
     char iface[255];
+    char destmac[17];
 };
 
 /*int indexof(char c){
@@ -73,6 +74,7 @@ make_trie(struct trie* root, const char contents[6][100][255], int i) {
         n = n->next[rem].ptr;
     }
     strcpy(n->iface, contents[5][i]);
+    strcpy(n->destmac, contents[3][i]);
     // printf("\n%s %X %X %X\n", n->iface, n, n->next[0].ptr, n->next[0].ptr);
 }
 
@@ -92,6 +94,7 @@ ifacelookup(struct trie* root, uint32_t address) {
     }
     // printf("\n%X %X %X %X\n", address, n, 	n->next[0].ptr, n->next[1].ptr);
     // n=n->next[address%2].ptr;
-    printf("\nIn lookup %s\n", n->iface);
+    printf("\nIn lookup and interface is %s\n", n->iface);
+    printf("\nIn lookup and destmac is %s\n", n->destmac);
     return n->iface;
 }
